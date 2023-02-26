@@ -31,6 +31,8 @@ public class Application {
         Application app = new Application();
         app.replaceAnnotation();
 
+        // TODO:将注解的import丢进去
+
         ClassInf c = ClassInf.getInstance();
         app.writeCodeWithAnnotation(c.getPrefix() + c.getSuffix(), c.getAbstractPos(), false);
     }
@@ -42,7 +44,7 @@ public class Application {
                 "     * ", "\t@ApiModelProperty(value = \"").replace("\n     */", "\")");
 
         System.out.println("-----");
-        instance.setSuffix(suffix);
+        instance.setSuffix(replace);
     }
 
     public void writeCodeWithAnnotation(String content, String filePath, boolean append) {
