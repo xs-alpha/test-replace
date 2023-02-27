@@ -1,7 +1,5 @@
 package top.devlwst.blog.util;
 
-import top.devlwst.blog.po.entity;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -45,7 +43,7 @@ public class ClassInformationImpl implements ClassInformation {
                 }
                 if (line.contains("public class " + instance.getClassName())) {
                     flag = true;
-                    System.out.println("contains----------------------->");
+                    System.out.println("[*]: contains-class:"+instance.getClassName());
                 }
                 // read next line
                 line = reader.readLine();
@@ -64,6 +62,7 @@ public class ClassInformationImpl implements ClassInformation {
         String className = clazz.getSimpleName();
         ClassInf classInf = ClassInf.getInstance();
         classInf.setClassName(className);
+        System.out.println("[*]: ");
     }
 
     @Override
@@ -79,6 +78,7 @@ public class ClassInformationImpl implements ClassInformation {
         System.out.println(systemPath);
 
         ClassInf.getInstance().setAbstractPos(systemPath);
+        System.out.println("[*]: current path:"+ systemPath);
     }
 
     @Override

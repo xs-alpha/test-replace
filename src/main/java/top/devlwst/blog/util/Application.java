@@ -2,10 +2,6 @@ package top.devlwst.blog.util;
 
 import top.devlwst.blog.po.entity;
 
-import javax.annotation.Resource;
-import java.io.FileWriter;
-import java.io.IOException;
-
 /**
  * @author xiaosheng
  * @date Created at 2023/2/26
@@ -31,10 +27,13 @@ public class Application {
         Application app = new Application();
         app.replaceAnnotation();
 
-        // TODO:将注解的import丢进去
+        Util util = new Util();
+        // 将注解的import丢进去
+        util.writeImports("import ", "import io.swagger.annotations.ApiModel;\n" +
+                "import io.swagger.annotations.ApiModelProperty;\n");
 
         ClassInf c = ClassInf.getInstance();
-        app.writeCodeWithAnnotation(c.getPrefix() + c.getSuffix(), c.getAbstractPos(), false);
+        util.writeCodeWithAnnotation(c.getPrefix() + c.getSuffix(), c.getAbstractPos(), false);
     }
 
     public void replaceAnnotation() {
@@ -43,20 +42,8 @@ public class Application {
         String replace = suffix.replace("    /**\n", "").replace(
                 "     * ", "\t@ApiModelProperty(value = \"").replace("\n     */", "\")");
 
-        System.out.println("-----");
+        System.out.println("[*]: replace annotation success");
         instance.setSuffix(replace);
-    }
-
-    public void writeCodeWithAnnotation(String content, String filePath, boolean append) {
-        FileWriter fileWriter;
-        try {
-            fileWriter = new FileWriter(filePath, append);
-            fileWriter.write(content);
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     // /home/xiaosheng/java/test/test-replace/test-replace/src/main/java/top/devlwst/blog/po/entity.java
