@@ -10,16 +10,6 @@ import java.io.IOException;
  */
 public class ClassInformationImpl implements ClassInformation {
 
-    public static void main(String[] args) {
-        ClassInf instance = ClassInf.getInstance();
-        String suffix = instance.getSuffix();
-        String replace = suffix.replace("    /**\n", "").replace(
-                "     * ", "\t@ApiModelProperty(value = \"").replace("\n     */", "\")");
-
-        System.out.println("-----");
-        System.out.println(replace);
-    }
-
     @Override
     public void getClassEntityText() {
         BufferedReader reader;

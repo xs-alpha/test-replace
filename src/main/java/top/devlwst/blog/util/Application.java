@@ -1,6 +1,6 @@
 package top.devlwst.blog.util;
 
-import top.devlwst.blog.po.entity;
+import top.devlwst.blog.po.ApiPageBO;
 
 /**
  * @author xiaosheng
@@ -15,7 +15,7 @@ public class Application {
         ClassInformation classInformation = new ClassInformationImpl();
 
         // 要替换的类名
-        Class<entity> clazz = entity.class;
+        Class<ApiPageBO> clazz = ApiPageBO.class;
         classInformation.storeClassInf(clazz);
 
         // 可以用setPath的重载方法,自己填充绝对路径
@@ -39,11 +39,22 @@ public class Application {
     public void replaceAnnotation() {
         ClassInf instance = ClassInf.getInstance();
         String suffix = instance.getSuffix();
+        // linux
         String replace = suffix.replace("    /**\n", "").replace(
                 "     * ", "\t@ApiModelProperty(value = \"").replace("\n     */", "\")");
 
+        // windows
+        replace = replace.replace("\t/**\n" ,
+                "").replace(
+                "\t * ", "\t@ApiModelProperty(value = \"").replace("\n" +
+                "\t */", "\")");
+
         System.out.println("[*]: replace annotation success");
         instance.setSuffix(replace);
+    }
+
+    public void replaceAnnotation(boolean flag) {
+        // todo: 正则替换
     }
 
     // /home/xiaosheng/java/test/test-replace/test-replace/src/main/java/top/devlwst/blog/po/entity.java
